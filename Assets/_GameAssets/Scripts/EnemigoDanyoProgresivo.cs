@@ -9,21 +9,21 @@ public class EnemigoDanyoProgresivo : MonoBehaviour
     [Header("Tiempo transcurrido entre cada incremento/decremento daño")]
     public float frecuencia;
 
-    private Transform transformPlayer;
+    private Transform transformMainCamera;
     public void OnTriggerEnter(Collider c){
-        if (c.gameObject.CompareTag("Player")) 
+        if (c.gameObject.CompareTag("MainCamera")) 
         {
-            transformPlayer=c.gameObject.transform;
+            transformMainCamera=c.gameObject.transform;
             InvokeRepeating("HacerDanyo",0,frecuencia);
         }  
     }
     public void OnTriggerExit(Collider c){
-        if (c.gameObject.CompareTag("Player")) 
+        if (c.gameObject.CompareTag("MainCamera")) 
         {
             CancelInvoke("HacerDanyo");
         }
     }
     private void HacerDanyo(){
-        transformPlayer.gameObject.GetComponent<PlayerHealthManager>()?.RecibirPupa(danyo);
+        transformMainCamera.gameObject.GetComponent<PlayerHealthManager>()?.RecibirPupa(danyo);
     }
 }
